@@ -1,0 +1,44 @@
+1.linux的ip地址是192.168.50.112  密码是：root/cloudwalk2016
+
+
+2.部署项目的位置是：/home/server  这个目录下的所有子文件夹都是一个具体的项目
+如：/home/server/falcon_server  这是一个falcon（猎鹰）项目。
+
+
+
+兴业数金tomcat的地址：/home/server/cweis_xingye/cweis0425/tomcat_cweis_web/tomcat7_cweis
+
+/home/server/cweis_xingye/cweis0425/tomcat_cweis_web/tomcat7_cweis/bin/startup.sh  启动tomcat的脚本
+
+/home/server/cweis_xingye/cweis0425/tomcat_cweis_web/tomcat7_cweis/bin/shutdown.sh  关闭tomcat的脚本。
+
+
+
+
+-Dmaven.javadoc.skip=true -Dmaven.test.skip=true 其中这个参数的意思是把javadoc和junit测试跳过。
+
+
+
+打包命令：mvn clean package -Dmaven.javadoc.skip=true -Dmaven.test.skip=true
+
+把打成的war包复制到：/home/server/boc_server/tomcat7/webapps这个目录下面。
+
+
+/home/server/boc_server/tomcat7/webapps/falcon-web/WEB-INF/classes/spring/spirng-ignite    修改成本地的ip地址
+
+项目访问地址：
+http://192.168.50.112:12345/falcon-web
+
+
+./shutdown.sh  
+ps -ef|grep java
+kill -9 7010
+./startup.sh
+
+
+
+/usr/local
+
+
+
+
