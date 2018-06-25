@@ -1,0 +1,30 @@
+cd ibis1.2/
+
+
+git branch -a
+
+
+git checkout ibis2.0-vip
+
+git checkout sbxj_all
+
+
+git status
+
+git config --help
+git config --get user.email
+git config --get user.name
+
+git config --global user.email wangrenzong@cloudwalk.cn
+
+
+cat .gitignore
+vim .gitignore
+git stash .gitignore
+
+//查看仓库访问地址
+git remote -v
+
+
+
+https://github.com/aalansehaiyang/technology-talk

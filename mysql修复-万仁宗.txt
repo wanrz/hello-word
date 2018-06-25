@@ -1,0 +1,45 @@
+//问题的起因，误删了root用户，导致root没有远程访问及数据库权限；
+DELETE FROM mysql.user WHERE USER = 'root';
+FLUSH PRIVILEGES;
+CREATE USER 'root'@'%' IDENTIFIED BY 'cloudwalk2016';
+GRANT ALL  ON *.* TO 'root'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+//解决办法
+步骤一：
+cmd打开一个命令窗口 进入
+C:\Program Files\MySQL\MySQL Server 5.5\bin
+在输入此命令之前先在任务管理器中结束mysqld.exe进程，确保mysql服务器端已结束运行。
+mysqld --skip-grant-tables
+此时就跳过了mysql的用户验证。
+步骤二：
+cmd再次打开一个命令窗口 进入
+然后直接输入mysql，
+输入show databases;   可以看到所有数据库说明成功登陆。其中mysql库就是保存用户名的地方。
+输入 use mysql;   选择mysql数据库。
+show tables查看所有表，会发现有个user表，这里存放的就是用户名，密码，权限等等账户信息。
+输入select user,host,password from user;   来查看账户信息。
+更改root密码，输入update user set password=password('123456') where user='root' and host='localhost';
+再次查看账户信息，select user,host,password from user;   可以看到密码已被修改。
+quit退出命令行，重启mysql数据库，用新密码尝试登录。
+
+执行上述操作后，任然无效可以修改user表
+
+update user set password=password('123456') where user='root'；
+update user set host=('localhost') where user='root';
+*****万能的解决办法******
+
+
+service mysqld restart；
+
+
+
+GRANT ALL  ON *.* TO 'cloudwalk'@'%' IDENTIFIED BY 'cloudwalk2016';
+GRANT ALL  ON *.* TO 'cloudwalk'@'localhost' IDENTIFIED BY 'cloudwalk2016';
+GRANT ALL  ON *.* TO 'root'@'%' IDENTIFIED BY '123456';
+GRANT ALL  ON *.* TO 'root'@'localhost' IDENTIFIED BY '123456';
+
+FLUSH PRIVILEGES;
+
+update user set host=('localhost') where user='root';
+
+
